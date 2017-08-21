@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	
+	"settings":
+	{
+		"tab_size": 4,
+    	"translate_tabs_to_spaces": true,
+	},
+
+	"syntax_override":
+	{
+		"\\.c$": ["C Improved", "C Improved"],
+		"\\.h$": ["C Improved", "C Improved"]
+	}
+}
