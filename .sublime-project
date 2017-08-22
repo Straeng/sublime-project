@@ -16,5 +16,15 @@
 	{
 		"\\.c$": ["C Improved", "C Improved"],
 		"\\.h$": ["C Improved", "C Improved"]
-	}
+	},
+
+	"build_systems":
+	[
+		{
+			"name": "build & test",
+			"cmd": ["cmake .. && make && ctest -v"],
+			"working_dir": "${project_path}/build",
+			"shell": true
+		}
+	]
 }
