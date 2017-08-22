@@ -1,12 +1,21 @@
 #!/bin/bash
 
+if [ "$#" -ne 2 ]; then
+    echo "Invalid argument(s)"
+    exit 1
+fi
+
+if [ ! -d "$2" ]; then
+    echo "$2 does not exist"
+    exit 1
+fi
+
 TEMPLATE_NAME=sublime-project
 TEMPLATE=https://github.com/Straeng/sublime-project.git
 PROJECT_NAME=$1
+DIR=$2
 
-# the directory of the script
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
-
+pushd $DIR
 # the temp directory used, within $DIR
 WORK_DIR=`mktemp -d -p "$DIR"`
 
@@ -29,9 +38,14 @@ git clone $TEMPLATE $WORK_DIR
 pushd $WORK_DIR
 rm -rf .git
 rm README.md
+rm initproject.sh
+mv template.sublime-project ${PROJECT_NAME}.sublime-project
 sed -i "s/${TEMPLATE_NAME}/${PROJECT_NAME}/g" CMakeLists.txt
 popd
 
 mkdir -p $DIR/$PROJECT_NAME
 cp -r $WORK_DIR/. $DIR/$PROJECT_NAME
+mkdir -p $DIR/$PROJECT_NAME/build
+popd
 
+subl --project $DIR/$PROJECT_NAME/${PROJECT_NAME}.sublime-project
