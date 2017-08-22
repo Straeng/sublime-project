@@ -1,9 +1,10 @@
-add_executable (Test test.c)
+include_directories("${PROJECT_SOURCE_DIR}/src")
 
-find_package(cmocka REQUIRED)
+add_executable(test_func test_func.c)
+add_dependencies(test_func test_func)
+add_test(test_func test_func)
+target_link_libraries(test_func func cmocka)
 
 
-include_directories(${CMOCKA_INCLUDE_DIRS})
-target_link_libraries (Test ${CMOCKA_LIBS})
-
-#add_test (NAME MyTest COMMAND Test)
+#file(GLOB SOURCES *.c)
+#add_executable(Prog ${SOURCES})

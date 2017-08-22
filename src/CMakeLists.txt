@@ -1,2 +1,1 @@
-file(GLOB SOURCES *.c)
-add_executable(sublime-test ${SOURCES})
+add_library(func func.c)
